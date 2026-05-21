@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <h1>indexedDB TEST</h1>
+    <script>
+        var db = window.indexedDB.open("savedLevels", 2)
+        db.onsuccess = (event) => {
+  window.alert("Database initialized.");
+
+  // store the result of opening the database in the db
+  // variable. This is used a lot below
+  t = db.result;
+  console.warn(t)
+};
+db.onerror = (event) => {
+    alert(event.target.error)
+  console.error(event.target.error)
+};
+db.onupgradeneeded = (event) => {
+  t = db.result;
+var s = t.createObjectStore("savedLevels", {
+    keyPath: "test",
+  }, { autoIncrement: true });
+  s.createIndex("x", "x", { unique: false });
+
+  ({
+    hello: "world",
+    testing: "123",
+  }).forEach((customer) => {
+    objStore.add(customer.name);
+  });
+};
+    </script>
+</body>
+
+</html>
